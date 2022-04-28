@@ -14,10 +14,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ActivityLV extends AppCompatActivity {
+public class Registro extends AppCompatActivity {
 
-    private TextView tvLV;
-    private ListView lv1;
+    private TextView tvUs, tvCon, tvCon2;
+
 
 
     @Override
@@ -25,23 +25,14 @@ public class ActivityLV extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lv);
 
-        tvLV = (TextView) findViewById(R.id.tv1);
-        lv1 = (ListView) findViewById(R.id.lv1);
-
-
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, "onResume", Toast.LENGTH_LONG).show();
-        setContentView(R.layout.activity_lv);
-        lv1 = (ListView) findViewById(R.id.lv1);
+        tvUs = (TextView) findViewById(R.id.usu);
+        tvCon = (TextView) findViewById(R.id.contra);
+        tvCon2 = (TextView) findViewById(R.id.contra2);
 
     }
 
-    public void aTareas(View view){
-        Intent toTareas = new Intent(this, Tareas.class);
-        startActivity(toTareas);
+    public void reg(View view){
+
     }
 
 

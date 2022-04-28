@@ -4,9 +4,7 @@
     <string name="tareas">Añadir o editar tareas</string>
     <string name="usuario">Usuario</string>
     <string name="contraseña">Contraseña</string>
-    <string name="Repetircontraseña">Repetir contraseña</string>
     <string name="log">Acceder</string>
-    <string name="registrar">Registrar</string>
     <string name="recordar">Recordar este usuario</string>
 
     <string name="sumar">Añadir tarea</string>

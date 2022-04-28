@@ -11,18 +11,6 @@ public class Objetos {
         this.desc = dsc;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
     public void update(int iD, String nm, String dsc){
         this.id = iD;
         this.nombre = nm;
@@ -40,6 +28,5 @@ public class Objetos {
     public String getDesc(){
         return desc;
     }
-
 
 }

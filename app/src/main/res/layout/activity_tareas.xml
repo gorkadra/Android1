@@ -7,7 +7,7 @@
     tools:context=".Tareas">
 
     <EditText
-        android:id="@+id/desc"
+        android:id="@+id/usu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -48,9 +48,10 @@
         android:layout_height="42dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="36dp"
+        android:onClick="Registrar"
         android:text="@string/sumar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc" />
+        app:layout_constraintTop_toBottomOf="@+id/usu" />
 
 
     <Button
@@ -59,9 +60,10 @@
         android:layout_height="42dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="36dp"
+        android:onClick="Eliminar"
+        android:text="@string/eliminar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btEditar"
-        tools:text="@string/eliminar" />
+        app:layout_constraintTop_toBottomOf="@+id/btEditar" />
 
     <Button
         android:id="@+id/btEditar"
@@ -69,9 +71,10 @@
         android:layout_height="42dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="36dp"
+        android:onClick="Editar"
+        android:text="@string/editar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btBuscar"
-        tools:text="@string/editar" />
+        app:layout_constraintTop_toBottomOf="@+id/btBuscar" />
 
     <Button
         android:id="@+id/btBuscar"
@@ -79,6 +82,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="36dp"
+        android:onClick="Buscar"
         android:text="@string/buscar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btSumar" />
