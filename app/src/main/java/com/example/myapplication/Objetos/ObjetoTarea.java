@@ -1,14 +1,17 @@
-package com.example.myapplication;
+package com.example.myapplication.Objetos;
 
-public class Objetos {
+public class ObjetoTarea {
     private String nombre;
     private int id;
     private String desc;
 
-    public Objetos(int iD, String nm, String dsc){
+    public ObjetoTarea(int iD, String nm, String dsc){
         this.id = iD;
         this.nombre = nm;
         this.desc = dsc;
+    }
+    public ObjetoTarea(){
+
     }
 
     public void setNombre(String nombre) {
