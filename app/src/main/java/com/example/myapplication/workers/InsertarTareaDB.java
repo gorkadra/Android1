@@ -1,6 +1,7 @@
 package com.example.myapplication.workers;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Data;
@@ -16,21 +17,25 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class RegistroDB extends Worker {
-    public RegistroDB(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+public class InsertarTareaDB extends Worker {
+    public InsertarTareaDB(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
     @NonNull
     @Override
     public Result doWork() {
-        String direccion = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/gdelrio004/WEB/Registro.php?";
+        String direccion = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/gdelrio004/WEB/InsertarTarea.php?";
         HttpURLConnection urlConnection;
 
         //Parametros que se van a enviar en la conexion
-        String usuario = getInputData().getString("nombre");
-        String contra = getInputData().getString("contra");
-        String parametros = "nombre=" + usuario + "&contra=" + contra;
+        String nombre = getInputData().getString("nombre");
+        String desc = getInputData().getString("descripcion");
+        String prop = getInputData().getString("propietario");
+        //nombre.replace(" ","%20");
+        Log.d("nombre ", nombre);
+        //desc.replace(" ","%20");
+        String parametros = "nombre=" + nombre + "&descripcion=" + desc + "&propietario=" + prop;
         try {
             //Preparar datos de la conexion
             URL destino = new URL(direccion+parametros);
@@ -40,6 +45,7 @@ public class RegistroDB extends Worker {
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoOutput(true);
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            Log.d("url visitada ", urlConnection.toString());
             PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
             out.print(parametros);
             out.close();

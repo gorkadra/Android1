@@ -41,7 +41,7 @@ public class ActivityLV extends AppCompatActivity {
     private TextView tvLV;
     private ListView lv1;
     private ProgressDialog progreso;
-    private List<Integer> ids = new ArrayList<>();
+    private List<String> ids = new ArrayList<>();
     private List<String> nombres = new ArrayList<>();
     private List<String> descripciones = new ArrayList<>();
     private List<ObjetoTarea> listaTareas = new ArrayList<ObjetoTarea>();
@@ -68,16 +68,23 @@ public class ActivityLV extends AppCompatActivity {
 
         setContentView(R.layout.activity_lv);
         ListView tareas = (ListView) findViewById(R.id.lv1);
-        //ids.add(0);
+        //ids.add("0");
         //nombres.add("tarea de prueba");
         //descripciones.add("esto es solo una tarea de prueba");
 
-        cargarWebService();
+        //cargarWebService();
 
 
         AdapterTarea elAdaptador = new AdapterTarea(getApplicationContext(), ids, nombres, descripciones);
         tareas.setAdapter(elAdaptador);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        cargarWebService();
     }
 
     private void cargarWebService() {
@@ -104,7 +111,7 @@ public class ActivityLV extends AppCompatActivity {
                                     toast.show();
                                     progreso.hide();
                                 } else if (workInfo.getOutputData().getString("datos").equals("no hay tareas")) {
-                                    ids.add(1);
+                                    ids.add("1");
                                     nombres.add("No hay tareas");
                                     descripciones.add("Este usuario no dispone de tareas, para asignarlas vaya a 'añadir o editar tarea'");
 
@@ -112,7 +119,53 @@ public class ActivityLV extends AppCompatActivity {
                                     AdapterTarea elAdaptador = new AdapterTarea(getApplicationContext(), ids, nombres, descripciones);
                                     tareas.setAdapter(elAdaptador);
                                     progreso.hide();
+                                    progreso.dismiss();
                                 } else{
+                                    String resultados = workInfo.getOutputData().getString("datos");
+                                    String[] resultSeparados = new String[3];
+                                    resultSeparados = resultados.split("],");
+                                    String[] resultID = resultSeparados[0].split(":");
+                                    String[] resultNombre= resultSeparados[1].split(":");
+                                    String[] resultDesc = resultSeparados[2].split(":");
+                                    Log.d("Resultado spliteado ID: ", resultID[1]);
+                                    Log.d("Resultado spliteado Nombre: ", resultNombre[1]);
+                                    Log.d("Resultado spliteado Desc: ", resultDesc[1]);
+
+                                    StringBuilder id = new StringBuilder(resultID[1]);
+                                    StringBuilder nomb = new StringBuilder(resultNombre[1]);
+                                    StringBuilder de = new StringBuilder(resultDesc[1]);
+
+                                    id.deleteCharAt(0);
+                                    id.deleteCharAt(0);
+                                    id.deleteCharAt(id.length()-1);
+                                    resultID = id.toString().split("\",\"");
+
+                                    nomb.deleteCharAt(0);
+                                    nomb.deleteCharAt(0);
+                                    nomb.deleteCharAt(nomb.length()-1);
+                                    resultNombre = nomb.toString().split("\",\"");
+
+                                    de.deleteCharAt(0);
+                                    de.deleteCharAt(0);
+                                    de.deleteCharAt(de.length()-1);
+                                    de.deleteCharAt(de.length()-1);
+                                    de.deleteCharAt(de.length()-1);
+                                    resultDesc = de.toString().split("\",\"");
+
+                                    ListView tareas = (ListView) findViewById(R.id.lv1);
+                                    ids.clear();
+                                    nombres.clear();
+                                    descripciones.clear();
+                                    for(int i=0;i<resultID.length;i++){
+                                        ids.add(resultID[i]);
+                                        nombres.add(resultNombre[i]);
+                                        descripciones.add(resultDesc[i]);
+                                    }
+                                    AdapterTarea elAdaptador = new AdapterTarea(getApplicationContext(), ids, nombres, descripciones);
+                                    tareas.setAdapter(elAdaptador);
+                                    progreso.hide();
+                                    progreso.dismiss();
+
 
                                 }
                             } else {
@@ -132,6 +185,7 @@ public class ActivityLV extends AppCompatActivity {
 
     public void aTareas(View view){
         Intent toTareas = new Intent(this, Tareas.class);
+        toTareas.putExtra("usuario", propietario);
         startActivity(toTareas);
     }
 

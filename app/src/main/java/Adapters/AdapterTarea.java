@@ -19,11 +19,11 @@ public class AdapterTarea extends BaseAdapter {
 
     private Context contexto;
     private LayoutInflater inflater;
-    private List<Integer> id;
+    private List<String> id;
     private List<String> nombre;
     private List<String> desc;
 
-    public AdapterTarea(Context contexto, List<Integer> id, List<String> nombre, List<String> desc) {
+    public AdapterTarea(Context contexto, List<String> id, List<String> nombre, List<String> desc) {
         this.contexto = contexto;
         this.inflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.id = id;
@@ -53,7 +53,7 @@ public class AdapterTarea extends BaseAdapter {
         TextView tvId=(TextView) view.findViewById(R.id.idTarea);
         TextView tvDesc= (TextView) view.findViewById(R.id.descTarea);
         tvNombre.setText(nombre.get(i));
-        tvId.setText(String.valueOf(id.get(i)));
+        tvId.setText(id.get(i));
         tvDesc.setText(desc.get(i));
         return view;
     }
